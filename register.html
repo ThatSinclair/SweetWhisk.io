@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Sweet Whisk</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fefeff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #ffb6c1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #e75480;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sweet Whisk</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html" class="active">Register</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="cart.html">My Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-container">
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <input type="text" id="name" required placeholder="Your name" />
+                <input type="email" id="email" required placeholder="Your email" />
+                <input type="password" id="password" required minlength="6" placeholder="Password" />
+                <button type="submit">Register</button>
+                <p id="registerMessage"></p>
+            </form>
+            <p id="register-message"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sweet Whisk. Your sweet identity begins here 🍬</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById("registerForm");
+        const msg = document.getElementById("registerMessage");
+      
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+      
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim().toLowerCase();
+          const password = document.getElementById("password").value;
+      
+          const accounts = JSON.parse(localStorage.getItem("userAccounts")) || [];
+          const exists = accounts.some(acc => acc.email === email);
+          if (exists) {
+            msg.textContent = "❌ Email already registered!";
+            msg.style.color = "red";
+            return;
+          }
+      
+          const newUser = { name, email, password };
+          accounts.push(newUser);
+          localStorage.setItem("userAccounts", JSON.stringify(accounts));
+      
+          msg.textContent = "✅ Registered successfully!";
+          msg.style.color = "green";
+        });
+      </script>
+      
+</body>
+</html>

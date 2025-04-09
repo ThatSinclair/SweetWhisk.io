@@ -1,0 +1,268 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f2faff; /* 💙 Light blue background */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header styles */
+header {
+    background-color: #e0f0ff; /* soft light blue */
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 4px solid #ffb6c1; /* light pink border */
+}
+
+header h1 {
+    color: #6fa1c4; /* cool blue text */
+    font-size: 2.5em;
+}
+
+nav ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #b3e0ff; /* light aqua blue hover */
+    color: #fff;
+}
+
+/* Main content */
+main {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.hero h2 {
+    font-size: 2.2em;
+    color: #6fa1c4;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #ffb6c1; /* pink buttons */
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e18398;
+}
+
+/* Forms */
+form {
+    background-color: #ffffff;
+    padding: 25px;
+    border: 2px dashed #b3e0ff;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: auto;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+form button {
+    background-color: #ffb6c1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+form button:hover {
+    background-color: #e18398;
+}
+
+/* Profile & Cart */
+.profile-info,
+.cart {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #b3e0ff;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+}
+
+.cart table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart th,
+.cart td {
+    border: 1px solid #eee;
+    padding: 12px;
+    text-align: center;
+}
+
+.cart th {
+    background-color: #e0f0ff;
+}
+
+.cart-actions {
+    text-align: right;
+}
+
+.cart-actions .btn {
+    margin-left: 10px;
+}
+
+/* Menu Grid */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.menu-item {
+    background-color: #fff;
+    border: 2px dashed #add8e6;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(173, 216, 230, 0.3);
+}
+
+.menu-item h3 {
+    color: #6fa1c4;
+    margin-bottom: 10px;
+}
+
+.menu-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(173, 216, 230, 0.2);
+}
+
+/* Footer */
+footer {
+    background-color: #e0f0ff;
+    padding: 20px;
+    text-align: center;
+    border-top: 3px solid #ffb6c1;
+    margin-top: 40px;
+    color: #555;
+}
+
+.remove-btn {
+    background-color: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #ffb6c1;
+    box-shadow: 0 0 5px #ff7489;
+}
+
+
+.profile-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #b3e0ff;
+}
+
+.profile-container h2 {
+    color: #6fa1c4;
+    margin-bottom: 1rem;
+}
+
+.profile-container p {
+    margin: 8px 0;
+}
+
+.profile-container label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: bold;
+    color: #444;
+}
+
+.profile-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.form-message {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1rem;
+  }
+  

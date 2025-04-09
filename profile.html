@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile - Sweet Whisk</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Sweet Whisk</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="profile.html" class="active">Profile</a></li>
+        <li><a href="cart.html">My Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-container">
+      <h2>My Profile</h2>
+      <p><strong>Name:</strong> <span id="profile-name">—</span></p>
+      <p><strong>Email:</strong> <span id="profile-email">—</span></p>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" placeholder="Enter phone number">
+
+      <label for="address">Home Address:</label>
+      <input type="text" id="address" placeholder="Enter home address">
+
+      <button class="btn" onclick="updateUser()">Save Info</button>
+      <button class="btn" onclick="logout()">Logout</button>
+
+      <p id="update-message"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sweet Whisk. Your sweet info is safe here 🍬</p>
+  </footer>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("userAccount"));
+
+    if (!user || !user.email) {
+      // Not logged in
+      window.location.href = "login.html";
+    } else {
+      // Display info
+      document.getElementById("profile-name").textContent = user.name || "—";
+      document.getElementById("profile-email").textContent = user.email || "—";
+      document.getElementById("phone").value = user.phone || "";
+      document.getElementById("address").value = user.address || "";
+    }
+
+    function updateUser() {
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+
+      user.phone = phone;
+      user.address = address;
+
+      localStorage.setItem("userAccount", JSON.stringify(user));
+
+      document.getElementById("update-message").textContent = "Info updated! 🥳";
+      document.getElementById("update-message").style.color = "green";
+    }
+
+    function logout() {
+      localStorage.removeItem("userAccount");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

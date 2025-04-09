@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart - Sweet Whisk</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .remove-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sweet Whisk</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="cart.html">My Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cart">
+            <h2>Your Cart</h2>
+            <table id="cart-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-body">
+                    <!-- Items will be inserted here -->
+                </tbody>
+            </table>
+            <p id="total-price"><strong>Total: $0.00</strong></p>
+            <button onclick="clearCart()" class="btn">Clear Cart</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sweet Whisk. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem("userAccount"));
+        const email = user?.email;
+        const cartKey = `cart_${email}`;
+
+        function displayCart() {
+            if (!email) {
+                document.querySelector(".cart").innerHTML = "<p>Please log in to view your cart.</p>";
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+            let cartBody = document.getElementById('cart-body');
+            let total = 0;
+            cartBody.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartBody.innerHTML = `<tr><td colspan="3">Your cart is empty 🧁</td></tr>`;
+                document.getElementById('total-price').innerHTML = `<strong>Total: $0.00</strong>`;
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>$${item.price.toFixed(2)}</td>
+                    <td><button class="remove-btn" onclick="removeItem(${index})">X</button></td>
+                `;
+                cartBody.appendChild(row);
+                total += item.price;
+            });
+
+            document.getElementById('total-price').innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+            cart.splice(index, 1);
+            localStorage.setItem(cartKey, JSON.stringify(cart));
+            displayCart();
+        }
+
+        function clearCart() {
+            localStorage.removeItem(cartKey);
+            displayCart();
+            alert("Cart cleared!");
+        }
+
+        window.onload = displayCart;
+    </script>
+
+</body>
+</html>

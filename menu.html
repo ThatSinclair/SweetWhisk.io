@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu - Sweet Whisk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Sweet Whisk</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="cart.html">My Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="menu">
+            <h2>Our Sweet Menu</h2>
+            <p>Freshly baked, lovingly crafted, and ready to melt in your mouth! 🍩🍓</p>
+
+
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <img src="menu_item/chocolate_cupcakes.jpg" alt="Chocolate Cupcake">
+                    <h3>Chocolate Cupcake</h3>
+                    <p>Rich cocoa cake with creamy vanilla swirl frosting.</p>
+                    <p><strong>$3.00</strong></p>
+                    <button class="btn" onclick="addToCart('Chocolate Cupcake', 3.00)">Add to Cart</button>
+
+                </div>
+            
+                <div class="menu-item">
+                    <img src="menu_item/strawberry_macaron.jpg" alt="Strawberry Macaron">
+                    <h3>Strawberry Macaron</h3>
+                    <p>Crunchy outside, chewy inside, filled with strawberry buttercream.</p>
+                    <p><strong>$1.50</strong></p>
+                    <button class="btn" onclick="addToCart('Strawberry Macaron', 1.50)">Add to Cart</button>
+
+                </div>
+            
+                <div class="menu-item">
+                    <img src="menu_item/rainbow_layer_cake_slice.jpg" alt="Rainbow Cake">
+                    <h3>Rainbow Layer Cake Slice</h3>
+                    <p>Colorful layers stacked with whipped cream frosting.</p>
+                    <p><strong>$4.50</strong></p>
+                    <button class="btn" onclick="addToCart('Rainbow Layer Cake Slice', 4.50)">Add to Cart</button>
+
+                </div>
+            
+                <div class="menu-item">
+                    <img src="menu_item/mini_cheesecake.jpg" alt="Mini Cheesecake">
+                    <h3>Mini Cheesecake</h3>
+                    <p>Classic cheesecake with graham crust and fruit topping options.</p>
+                    <p><strong>$3.75</strong></p>
+                    <button class="btn" onclick="addToCart('Mini Cheesecake', 3.75)">Add to Cart</button>
+
+                </div>
+            
+                <div class="menu-item">
+                    <img src="menu_item/cinnamon_roll.jpg" alt="Cinnamon Roll">
+                    <h3>Cinnamon Roll</h3>
+                    <p>Warm, gooey swirl with drizzled vanilla glaze.</p>
+                    <p><strong>$2.80</strong></p>
+                    <button class="btn" onclick="addToCart('Cinnamon Roll', 2.80)">Add to Cart</button>
+
+                </div>
+            </div>
+
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sweet Whisk. One bite and you're hooked 🍰</p>
+    </footer>
+
+    <script>
+        function addToCart(itemName, itemPrice) {
+          const user = JSON.parse(localStorage.getItem("userAccount"));
+          const email = user?.email;
+      
+          if (!email) {
+            alert("Please log in first to add items to your cart.");
+            return;
+          }
+      
+          const cartKey = `cart_${email}`;
+          const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+      
+          cart.push({ name: itemName, price: itemPrice });
+          localStorage.setItem(cartKey, JSON.stringify(cart));
+      
+          alert(`${itemName} added to your cart! 🛒`);
+        }
+      </script>
+      
+
+</body>
+</html>
