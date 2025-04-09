@@ -77,8 +77,11 @@
       const email = document.getElementById("email").value.trim().toLowerCase();
       const password = document.getElementById("password").value;
   
-      const users = JSON.parse(localStorage.getItem("userAccounts")) || [];
-      const matchedUser = users.find(u => u.email === email && u.password === password);
+      const accounts = JSON.parse(localStorage.getItem("userAccounts")) || [];
+  
+      const matchedUser = accounts.find(user => {
+        return user.email === email && atob(user.password) === password;
+      });
   
       if (!matchedUser) {
         msg.textContent = "❌ Incorrect email or password.";
@@ -87,14 +90,14 @@
       }
   
       localStorage.setItem("userAccount", JSON.stringify(matchedUser));
-      msg.textContent = "✅ Login successful!";
+      msg.textContent = "✅ Login successful! Redirecting...";
       msg.style.color = "green";
+  
       setTimeout(() => {
         window.location.href = "profile.html";
       }, 1000);
     });
   </script>
-
 
 </body>
 </html>
