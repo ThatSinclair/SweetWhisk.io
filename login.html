@@ -71,7 +71,7 @@
     const form = document.getElementById("loginForm");
     const msg = document.getElementById("loginMessage");
   
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
   
       const email = document.getElementById("email").value.trim().toLowerCase();
@@ -79,8 +79,11 @@
   
       const accounts = JSON.parse(localStorage.getItem("userAccounts")) || [];
   
+      // Hash the entered password before comparing
+      const hashedInputPassword = await hashPassword(password);
+  
       const matchedUser = accounts.find(user => {
-        return user.email === email && atob(user.password) === password;
+        return user.email === email && user.password === hashedInputPassword;
       });
   
       if (!matchedUser) {
@@ -97,7 +100,17 @@
         window.location.href = "profile.html";
       }, 1000);
     });
+  
+    // 🛡 SHA-256 hashing function
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
   </script>
+  
 
 </body>
 </html>

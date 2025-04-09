@@ -76,24 +76,19 @@
     const form = document.getElementById("registerForm");
     const msg = document.getElementById("registerMessage");
 
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim().toLowerCase();
       const password = document.getElementById("password").value;
 
-      // 🍓 Password length check
       if (password.length < 6) {
         msg.textContent = "❌ Password must be at least 6 characters long.";
         msg.style.color = "red";
         return;
       }
 
-      // 🍩 Encrypt password with base64
-      const encryptedPassword = btoa(password);
-
-      // 🍰 Load accounts
       const accounts = JSON.parse(localStorage.getItem("userAccounts")) || [];
       const exists = accounts.some(acc => acc.email === email);
 
@@ -103,11 +98,13 @@
         return;
       }
 
-      // ✅ Save new account
-      const newUser = { name, email, password: encryptedPassword };
+      // 🔐 Securely hash the password
+      const hash = await hashPassword(password);
+
+      const newUser = { name, email, password: hash };
       accounts.push(newUser);
       localStorage.setItem("userAccounts", JSON.stringify(accounts));
-      localStorage.setItem("userAccount", JSON.stringify(newUser)); // auto-login
+      localStorage.setItem("userAccount", JSON.stringify(newUser));
 
       msg.textContent = "✅ Registered successfully! Redirecting...";
       msg.style.color = "green";
@@ -116,6 +113,15 @@
         window.location.href = "profile.html";
       }, 1200);
     });
+
+    // SHA-256 hashing function 🛡
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
   </script>
 </body>
 </html>
